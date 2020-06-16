@@ -63,6 +63,15 @@ export class BsDatepickerInlineDirective implements OnInit, OnDestroy, OnChanges
    */
   @Output() bsValueChange: EventEmitter<Date> = new EventEmitter();
 
+  /**
+   * Emits an event when the datepicker is shown
+   */
+  @Output() onShown: EventEmitter<boolean>;
+  /**
+   * Emits an event when the datepicker is hidden
+   */
+  @Output() onHidden: EventEmitter<boolean>;
+
   protected _subs: Subscription[] = [];
 
   private _datepicker: ComponentLoader<BsDatepickerInlineContainerComponent>;
@@ -82,6 +91,9 @@ export class BsDatepickerInlineDirective implements OnInit, OnDestroy, OnChanges
       _viewContainerRef,
       _renderer
     );
+
+    this.onShown = this._datepicker.onShown;
+    this.onHidden = this._datepicker.onHidden;
   }
 
   ngOnInit(): void {
